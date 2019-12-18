@@ -1,0 +1,68 @@
+= AsciiDoctor example
+:toc: right 
+
+== AsciiDoctor via command line
+
+.Prerequisites
+* Ruby with the RubyGems package manager
+** Ruby DevelopmentKit (If not already included)
+* AsciiDoctor(Ruby Gem)
+
+Installation is shown below.
+
+=== Installation
+Ruby installation on Windows with the Chocolatey or the RubyInstaller.
+
+Install Ruby:: 
+https://chocolatey.org/[Chocolatey]:
+--
+ $ choco install ruby
+--
+The RubyInstaller can be found https://rubyinstaller.org/downloads/[here]. 
+
+Check installation::
+--
+ $ ruby -v
+ ruby 2.6.5p114 (2019-10-01 revision 67812) [x64-mingw32]
+--
+Get DevelopmentKit (if not already installed)::
+The DevelopmentKit is needed for RubyGems(Package Manager)
+--
+ $ ridk install
+--
+
+Install Gems::
+--
+ $ gems install asciidoctor
+--
+Check installation
+--
+ $ asciidoctor --version
+Asciidoctor 2.0.10 [https://asciidoctor.org]
+--
+
+=== Usage
+
+Convert an AsciiDoc file to HTML
+(Default converter is HTML5)
+
+ $ asciidoctor mysample.adoc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
