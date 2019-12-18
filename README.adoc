@@ -60,16 +60,29 @@ The *-o* flag sets the output target.
 
 The complete manual for commands can be found  https://asciidoctor.org/man/asciidoctor/[**here**]. +
 
+== Asciidoc Editor (AsciidocFx)
+Asciidoc FX is a book / document editor to build PDF, Epub, Mobi and HTML books, documents and slides. 
 
-== GitHub Pages with AsciiDoctor
+.Some of the featues are:
+* Real-Time Preview
+* Creating PDF, HTML, Docbook, ...
+* Many Extentions (PlantUML, JavaFX)
+
+https://github.com/asciidocfx/AsciidocFX/releases[Download]
 
 
+== GitHub Pages with AsciiDoc
+
+Currently, Github Pages cannot render an .adoc (AsciiDoc) file.
+To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTML files. This can simply be done with the command line, see <<Usage>>.
 
 
-
-
-
-
+== Links
+* https://asciidoctor.org/[Official AsciiDoctor Page]
+* https://asciidoctor.org/docs/convert-documents/[How to convert adoc files ]
+* https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc Cheatsheet (Syntax quick reference)]
+* https://www.asciidocfx.com/[AsciidocFx (AsciidocFx)]
+* https://pages.github.com/[GitHub Pages] 
 
 
 
