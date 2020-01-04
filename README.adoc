@@ -1,5 +1,25 @@
 = AsciiDoctor example
-:toc: right 
+:toc:
+:sourceDir: src/main/java
+
+== AsciiDoctor Maven-Plugin
+
+Adding the AsciiDoctor Maven-Plugin to the plugins in the `pom.xml`
+[source,xml]
+----
+    <plugin>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctor-maven-plugin</artifactId>
+            <version>${asciidoctor.maven.plugin.version}</version>
+    </plugin>
+
+----
+Here it is configured to generate a HTML file (= convert the `README.adoc`)
+
+[source,xml]
+----
+include::pom.xml[tags=plugin]
+----
 
 == AsciiDoctor via command line
 
