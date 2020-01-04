@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>at.htl</groupId>
+    <artifactId>asciidoctor-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
+    </properties>
+
+
+    <build>
+        <defaultGoal>process-resources</defaultGoal>
+        <plugins>
+            <!-- tag::plugin[] -->
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor.maven.plugin.version}</version>
+                <configuration>
+                    <!-- SourceDir & SourceDoc(= relative to SourceDir) -->
+                    <sourceDirectory>.</sourceDirectory>
+                    <sourceDocumentName>README.adoc</sourceDocumentName>
+                    <!-- OutputDir -->
+                    <outputDirectory>docs</outputDirectory>
+                    <outputFile>index.html</outputFile>
+                    <backend>html</backend>
+
+                    <!-- Syntax-Highlighter -->
+                    <sourceHighlighter>coderay</sourceHighlighter>
+
+                    <logHandler>
+                        <failIf>
+                            <severity>DEBUG</severity>
+                        </failIf>
+                    </logHandler>
+
+                    <resources>
+                        <resource>
+                            <directory>./</directory>
+                            <!-- No files are copied -->
+                            <exclude>**/**</exclude>
+                        </resource>
+                    </resources>
+                </configuration>
+
+                <!-- Generate HTML file -->
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- end::plugin[] -->
+        </plugins>
+    </build>
+</project>
