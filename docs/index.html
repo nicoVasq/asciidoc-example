@@ -441,6 +441,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_very_useful_features">Very useful features</a>
+<ul class="sectlevel2">
+<li><a href="#_source_code_listings">Source code listings</a></li>
+<li><a href="#_including_real_source_code">Including real source code</a></li>
+</ul>
+</li>
 <li><a href="#_asciidoctor_maven_plugin">AsciiDoctor Maven-Plugin</a></li>
 <li><a href="#_asciidoctor_via_command_line">AsciiDoctor via command line</a>
 <ul class="sectlevel2">
@@ -455,6 +461,100 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="_very_useful_features">Very useful features</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_source_code_listings">Source code listings</h3>
+<div class="paragraph">
+<p>Source code listings can be especially useful for outlining some specific code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    private String name; <b class="conum">(1)</b>
+    private int age; <b class="conum">(2)</b>
+    private String city; <b class="conum">(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>This is the name field</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">Usage:</div>
+<div class="content">
+<pre> ----
+ private String name; &lt;1&gt;
+ private int age; &lt;2&gt;
+ private String city; &lt;3&gt;
+ ----
+ &lt;1&gt;This is the name field +
+ &lt;2&gt;... +
+ &lt;3&gt;... +</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_including_real_source_code">Including real source code</h3>
+<div class="paragraph">
+<p>Always up-tp-date source code!<br>
+Includes code snippets corresponding to source code referenced.</p>
+</div>
+<div class="listingblock">
+<div class="title">Include the whole file</div>
+<div class="content">
+<pre> [source,java]
+ ----
+ include::path/to/your/file.java[]
+ ----</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also define 'tags' in your file to only include the specified tag.<br>
+.Include only parts of it</p>
+</div>
+<div class="listingblock">
+<div class="title">Person.java</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// tag::fields[]</span>
+<span class="directive">private</span> <span class="predefined-type">String</span> name;
+<span class="directive">private</span> <span class="type">int</span> age;
+<span class="directive">private</span> <span class="predefined-type">String</span> city;
+<span class="comment">// end::fields[]</span>
+
+<span class="directive">public</span> Person() {
+}
+...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Only include parts of code</div>
+<div class="content">
+<pre>[source,java]
+ ----
+ include::path/to/your/file.java[tags=fields] <b class="conum">(1)</b>
+ ----</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>[tags=fields]</code> tells asciidoctor to only include code with that tag</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_asciidoctor_maven_plugin">AsciiDoctor Maven-Plugin</h2>
 <div class="sectionbody">
@@ -703,7 +803,20 @@ To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTM
 <p><a href="https://asciidoctor.org/">Official AsciiDoctor Page</a></p>
 </li>
 <li>
-<p><a href="https://asciidoctor.org/docs/convert-documents/">How to convert adoc files </a></p>
+<p><a href="https://asciidoctor.org/docs/asciidoctor-maven-plugin/">AsciiDoctor Maven-Plugin documentation</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/asciidoctor/asciidoctor-maven-examples">Maven-Plugin examples</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=MyhiD65qaUI">Quick video overview of AsciiDoctor</a></p>
+</li>
+<li>
+<p><a href="https://asciidoctor.org/docs/convert-documents/">How to convert adoc files</a></p>
 </li>
 <li>
 <p><a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/">AsciiDoc Cheatsheet (Syntax quick reference)</a></p>
@@ -721,7 +834,7 @@ To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTM
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-04 16:55:33 +0100
+Last updated 2020-01-05 17:07:07 +0100
 </div>
 </div>
 <style>

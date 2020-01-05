@@ -2,6 +2,71 @@
 :toc:
 :sourceDir: src/main/java
 
+== Very useful features
+
+=== Source code listings
+
+Source code listings can be especially useful for outlining some specific code.
+
+----
+    private String name; <1>
+    private int age; <2>
+    private String city; <3>
+----
+<1> This is the name field
+<2> ...
+<3> ...
+
+.Usage:
+----
+
+ ----
+ private String name; \<1>
+ private int age; \<2>
+ private String city; \<3>
+ ----
+ <1>This is the name field +
+ <2>... +
+ <3>... +
+----
+
+=== Including real source code
+Always up-tp-date source code! +
+Includes code snippets corresponding to source code referenced.
+
+.Include the whole file
+----
+ [source,java]
+ ----
+ include::path/to/your/file.java[]
+ ----
+----
+
+You can also define 'tags' in your file to only include the specified tag. +
+.Include only parts of it
+
+.Person.java
+[source,java]
+----
+// tag::fields[]
+private String name;
+private int age;
+private String city;
+// end::fields[]
+
+public Person() {
+}
+...
+----
+.Only include parts of code
+----
+[source,java]
+ ----
+ include::path/to/your/file.java[tags=fields] <1>
+ ----
+----
+<1> `[tags=fields]` tells asciidoctor to only include code with that tag
+
 == AsciiDoctor Maven-Plugin
 
 Adding the AsciiDoctor Maven-Plugin to the plugins in the `pom.xml`
@@ -12,7 +77,6 @@ Adding the AsciiDoctor Maven-Plugin to the plugins in the `pom.xml`
             <artifactId>asciidoctor-maven-plugin</artifactId>
             <version>${asciidoctor.maven.plugin.version}</version>
     </plugin>
-
 ----
 Here it is configured to generate a HTML file (= convert the `README.adoc`)
 
@@ -33,12 +97,12 @@ Installation is shown below.
 === Installation
 Ruby installation on Windows with the Chocolatey or the RubyInstaller.
 
-Install Ruby:: 
+Install Ruby::
 https://chocolatey.org/[Chocolatey]:
 --
  $ choco install ruby
 --
-The RubyInstaller can be found https://rubyinstaller.org/downloads/[**here**]. 
+The RubyInstaller can be found https://rubyinstaller.org/downloads/[**here**].
 
 Check installation
 --
@@ -81,7 +145,7 @@ The *-o* flag sets the output target.
 The complete manual for commands can be found  https://asciidoctor.org/man/asciidoctor/[**here**]. +
 
 == Asciidoc Editor (AsciidocFx)
-Asciidoc FX is a book / document editor to build PDF, Epub, Mobi and HTML books, documents and slides. 
+Asciidoc FX is a book / document editor to build PDF, Epub, Mobi and HTML books, documents and slides.
 
 .Some of the featues are:
 * Real-Time Preview
@@ -99,11 +163,13 @@ To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTM
 
 == Links
 * https://asciidoctor.org/[Official AsciiDoctor Page]
-* https://github.com/asciidoctor/asciidoctor-maven-examples[AsciiDoctor Maven-Plugin Examples]
-* https://asciidoctor.org/docs/convert-documents/[How to convert adoc files ]
+* https://asciidoctor.org/docs/asciidoctor-maven-plugin/[AsciiDoctor Maven-Plugin documentation]
+** https://github.com/asciidoctor/asciidoctor-maven-examples[Maven-Plugin examples]
+* https://www.youtube.com/watch?v=MyhiD65qaUI[Quick video overview of AsciiDoctor]
+* https://asciidoctor.org/docs/convert-documents/[How to convert adoc files]
 * https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc Cheatsheet (Syntax quick reference)]
 * https://www.asciidocfx.com/[AsciidocFx (AsciidocFx)]
-* https://pages.github.com/[GitHub Pages] 
+* https://pages.github.com/[GitHub Pages]
 
 
 
