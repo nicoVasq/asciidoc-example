@@ -561,15 +561,11 @@ Includes code snippets corresponding to source code referenced.</p>
 which you describe using plain text, to your AsciiDoc document.</code>
 - <a href="https://asciidoctor.org/docs/asciidoctor-diagram/" class="bare">https://asciidoctor.org/docs/asciidoctor-diagram/</a></p>
 </div>
-<div class="literalblock">
-<div class="title">PlantUML diagram</div>
+<div class="imageblock">
 <div class="content">
-<pre>Class01 "1" *-- "many" Class02 : contains
-
-Class03 o-- Class04 : aggregation
-
-Class05 --&gt; "1" Class06</pre>
+<img src="images/diagram-classes.png" alt="diagram classes" width="330" height="192">
 </div>
+<div class="title">PlantUML diagram</div>
 </div>
 <div class="listingblock">
 <div class="title">Code behind:</div>
@@ -663,7 +659,9 @@ The dependency <code>asciidoctorj-diagram</code> is only required when rendering
                     <span class="tag">&lt;outputFile&gt;</span>index.html<span class="tag">&lt;/outputFile&gt;</span>
                     <span class="tag">&lt;backend&gt;</span>html<span class="tag">&lt;/backend&gt;</span>
 
-
+                    <span class="tag">&lt;requires&gt;</span>
+                        <span class="tag">&lt;require&gt;</span>asciidoctor-diagram<span class="tag">&lt;/require&gt;</span>
+                    <span class="tag">&lt;/requires&gt;</span>
 
                     <span class="comment">&lt;!-- Syntax-Highlighter --&gt;</span>
                     <span class="tag">&lt;sourceHighlighter&gt;</span>coderay<span class="tag">&lt;/sourceHighlighter&gt;</span>
