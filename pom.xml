@@ -13,6 +13,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
+        <asciidoctor.diagram.version>2.0.0</asciidoctor.diagram.version>
     </properties>
 
 
@@ -24,6 +25,14 @@
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <version>${asciidoctor.maven.plugin.version}</version>
+                <!--Dependency required for rendering diagrams  -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram</artifactId>
+                        <version>${asciidoctor.diagram.version}</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
                     <!-- SourceDir & SourceDoc(= relative to SourceDir) -->
                     <sourceDirectory>.</sourceDirectory>
@@ -32,6 +41,10 @@
                     <outputDirectory>docs</outputDirectory>
                     <outputFile>index.html</outputFile>
                     <backend>html</backend>
+
+                    <requires>
+                        <require>asciidoctor-diagram</require>
+                    </requires>
 
                     <!-- Syntax-Highlighter -->
                     <sourceHighlighter>coderay</sourceHighlighter>
