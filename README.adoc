@@ -67,6 +67,58 @@ public Person() {
 ----
 <1> `[tags=fields]` tells asciidoctor to only include code with that tag
 
+=== Diagrams
+
+`Asciidoctor Diagram is a set of Asciidoctor extensions that enable you to add diagrams,
+which you describe using plain text, to your AsciiDoc document.`
+- https://asciidoctor.org/docs/asciidoctor-diagram/
+
+.PlantUML diagram
+[plantuml, diagram-classes]
+....
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : aggregation
+
+Class05 --> "1" Class06
+....
+
+.Code behind:
+----
+[plantuml, diagram-classes] <1> <2>
+....
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : aggregation
+
+Class05 --> "1" Class06
+....
+----
+<1> Diagram type, in this case it is https://plantuml.com/de/[PlantUML]
+<2> Name of the generated file (target)
+
+It can happen that the diagram is unable to render, because it is missing some
+libraries. In that case download http://www.graphviz.org/[Graphviz] and add it to your `PATH`
+
+If it's still not working, maybe adding the path to your graphviz manually in your plugin config (pom.xml) might help:
+
+.pom.xml
+[source,xml]
+----
+<plugin>
+    <groupId>org.asciidoctor</groupId>
+    <artifactId>asciidoctor-maven-plugin</artifactId>
+    ...
+    <configuration>
+        <attributes>
+            <graphvizdot>/PATH/TO/Graphviz/bin/dot</graphvizdot>
+        </attributes>
+        ...
+----
+
+
+https://github.com/asciidoctor/asciidoctor-maven-examples/tree/master/asciidoctor-diagram-example[Example: How to use the maven plugin with diagrams]
+
 == AsciiDoctor Maven-Plugin
 
 Adding the AsciiDoctor Maven-Plugin to the plugins in the `pom.xml`
@@ -79,11 +131,12 @@ Adding the AsciiDoctor Maven-Plugin to the plugins in the `pom.xml`
     </plugin>
 ----
 Here it is configured to generate a HTML file (= convert the `README.adoc`)
-
+The dependency `asciidoctorj-diagram` is only required when rendering a diagram (PlantUML, Graphviz, ...)
 [source,xml]
 ----
 include::pom.xml[tags=plugin]
 ----
+
 
 == AsciiDoctor via command line
 
@@ -163,8 +216,13 @@ To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTM
 
 == Links
 * https://asciidoctor.org/[Official AsciiDoctor Page]
+* https://asciidoctor.org/docs/asciidoctor-diagram/[AsciiDoctor Diagrams]
+** https://asciidoctor.org/news/2014/02/18/plain-text-diagrams-in-asciidoctor/[Blog]
+** https://plantuml.com/de/[PlantUML]
+** http://www.graphviz.org/[Graphviz]
 * https://asciidoctor.org/docs/asciidoctor-maven-plugin/[AsciiDoctor Maven-Plugin documentation]
 ** https://github.com/asciidoctor/asciidoctor-maven-examples[Maven-Plugin examples]
+** https://github.com/asciidoctor/asciidoctor-maven-examples/tree/master/asciidoctor-diagram-example[Using diagrams]
 * https://www.youtube.com/watch?v=MyhiD65qaUI[Quick video overview of AsciiDoctor]
 * https://asciidoctor.org/docs/convert-documents/[How to convert adoc files]
 * https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/[AsciiDoc Cheatsheet (Syntax quick reference)]

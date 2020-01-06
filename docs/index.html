@@ -445,6 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_source_code_listings">Source code listings</a></li>
 <li><a href="#_including_real_source_code">Including real source code</a></li>
+<li><a href="#_diagrams">Diagrams</a></li>
 </ul>
 </li>
 <li><a href="#_asciidoctor_maven_plugin">AsciiDoctor Maven-Plugin</a></li>
@@ -553,6 +554,71 @@ Includes code snippets corresponding to source code referenced.</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_diagrams">Diagrams</h3>
+<div class="paragraph">
+<p><code>Asciidoctor Diagram is a set of Asciidoctor extensions that enable you to add diagrams,
+which you describe using plain text, to your AsciiDoc document.</code>
+- <a href="https://asciidoctor.org/docs/asciidoctor-diagram/" class="bare">https://asciidoctor.org/docs/asciidoctor-diagram/</a></p>
+</div>
+<div class="literalblock">
+<div class="title">PlantUML diagram</div>
+<div class="content">
+<pre>Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : aggregation
+
+Class05 --&gt; "1" Class06</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code behind:</div>
+<div class="content">
+<pre>[plantuml, diagram-classes] <b class="conum">(1)</b> <b class="conum">(2)</b>
+....
+Class01 "1" *-- "many" Class02 : contains
+
+Class03 o-- Class04 : aggregation
+
+Class05 --&gt; "1" Class06
+....</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Diagram type, in this case it is <a href="https://plantuml.com/de/">PlantUML</a></p>
+</li>
+<li>
+<p>Name of the generated file (target)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>It can happen that the diagram is unable to render, because it is missing some
+libraries. In that case download <a href="http://www.graphviz.org/">Graphviz</a> and add it to your <code>PATH</code></p>
+</div>
+<div class="paragraph">
+<p>If it&#8217;s still not working, maybe adding the path to your graphviz manually in your plugin config (pom.xml) might help:</p>
+</div>
+<div class="listingblock">
+<div class="title">pom.xml</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.asciidoctor<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
+    ...
+    <span class="tag">&lt;configuration&gt;</span>
+        <span class="tag">&lt;attributes&gt;</span>
+            <span class="tag">&lt;graphvizdot&gt;</span>/PATH/TO/Graphviz/bin/dot<span class="tag">&lt;/graphvizdot&gt;</span>
+        <span class="tag">&lt;/attributes&gt;</span>
+        ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-maven-examples/tree/master/asciidoctor-diagram-example">Example: How to use the maven plugin with diagrams</a></p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -571,7 +637,8 @@ Includes code snippets corresponding to source code referenced.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Here it is configured to generate a HTML file (= convert the <code>README.adoc</code>)</p>
+<p>Here it is configured to generate a HTML file (= convert the <code>README.adoc</code>)
+The dependency <code>asciidoctorj-diagram</code> is only required when rendering a diagram (PlantUML, Graphviz, &#8230;&#8203;)</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -579,6 +646,14 @@ Includes code snippets corresponding to source code referenced.</p>
                 <span class="tag">&lt;groupId&gt;</span>org.asciidoctor<span class="tag">&lt;/groupId&gt;</span>
                 <span class="tag">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
                 <span class="tag">&lt;version&gt;</span>${asciidoctor.maven.plugin.version}<span class="tag">&lt;/version&gt;</span>
+                <span class="comment">&lt;!--Dependency required for rendering diagrams  --&gt;</span>
+                <span class="tag">&lt;dependencies&gt;</span>
+                    <span class="tag">&lt;dependency&gt;</span>
+                        <span class="tag">&lt;groupId&gt;</span>org.asciidoctor<span class="tag">&lt;/groupId&gt;</span>
+                        <span class="tag">&lt;artifactId&gt;</span>asciidoctorj-diagram<span class="tag">&lt;/artifactId&gt;</span>
+                        <span class="tag">&lt;version&gt;</span>${asciidoctor.diagram.version}<span class="tag">&lt;/version&gt;</span>
+                    <span class="tag">&lt;/dependency&gt;</span>
+                <span class="tag">&lt;/dependencies&gt;</span>
                 <span class="tag">&lt;configuration&gt;</span>
                     <span class="comment">&lt;!-- SourceDir &amp; SourceDoc(= relative to SourceDir) --&gt;</span>
                     <span class="tag">&lt;sourceDirectory&gt;</span>.<span class="tag">&lt;/sourceDirectory&gt;</span>
@@ -587,6 +662,8 @@ Includes code snippets corresponding to source code referenced.</p>
                     <span class="tag">&lt;outputDirectory&gt;</span>docs<span class="tag">&lt;/outputDirectory&gt;</span>
                     <span class="tag">&lt;outputFile&gt;</span>index.html<span class="tag">&lt;/outputFile&gt;</span>
                     <span class="tag">&lt;backend&gt;</span>html<span class="tag">&lt;/backend&gt;</span>
+
+
 
                     <span class="comment">&lt;!-- Syntax-Highlighter --&gt;</span>
                     <span class="tag">&lt;sourceHighlighter&gt;</span>coderay<span class="tag">&lt;/sourceHighlighter&gt;</span>
@@ -803,11 +880,30 @@ To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTM
 <p><a href="https://asciidoctor.org/">Official AsciiDoctor Page</a></p>
 </li>
 <li>
+<p><a href="https://asciidoctor.org/docs/asciidoctor-diagram/">AsciiDoctor Diagrams</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://asciidoctor.org/news/2014/02/18/plain-text-diagrams-in-asciidoctor/">Blog</a></p>
+</li>
+<li>
+<p><a href="https://plantuml.com/de/">PlantUML</a></p>
+</li>
+<li>
+<p><a href="http://www.graphviz.org/">Graphviz</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p><a href="https://asciidoctor.org/docs/asciidoctor-maven-plugin/">AsciiDoctor Maven-Plugin documentation</a></p>
 <div class="ulist">
 <ul>
 <li>
 <p><a href="https://github.com/asciidoctor/asciidoctor-maven-examples">Maven-Plugin examples</a></p>
+</li>
+<li>
+<p><a href="https://github.com/asciidoctor/asciidoctor-maven-examples/tree/master/asciidoctor-diagram-example">Using diagrams</a></p>
 </li>
 </ul>
 </div>
@@ -834,7 +930,7 @@ To use GitHub Pages with AsciiDoc files we have to convert the adoc files to HTM
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-05 17:07:07 +0100
+Last updated 2020-01-06 14:32:15 +0100
 </div>
 </div>
 <style>
